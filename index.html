@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Quase tudo sobre HTML + CSS</title>
+        <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
         <header>
@@ -71,15 +72,51 @@
             <h4>Audio</h4>
             <audio controls autoplay muted>
                 <source src="/images/Skycycle - The Ghost Is Here (320 kbps).mp3" type="audio/mpeg">
+                <p>Infelizmente seu navegador não consegue reproduzir este áudio.</p>
+                <!-- 
+                    Reflexão: poderia colocar o mesmo audio em outros formatos como audio/ogg ou audio/wav (que é menos recomendado) e tudo isso em sources diferentes.
+                    Então ele tentaria executar o audio do primeiro source, se por algum motivo não funcionar ele tentaria executar o audio do segundo source, ou do terceiro e assim sucessivamente.
+                    
+                    No final pode ser colocado uma mensagem em paragrafo mesmo informando que o navegador não conseguiu reproduzir nenhum dos audios referenciados e que ele baixe o audio no seguinte link
+                    O interessante aqui é que a mesma lógica funciona para a tag <picture> e <video>. Seguindo uma lógica similar ao switch das linguangens de programação.
+                    Isso é particularmente útil para garantir que o aúdio, video ou imagem abra  em qualquer dispositivo.
+
+                -->
             </audio>
             <br>
     
             <h4>Vídeo</h4>
             <video width="720px" controls autoplay muted loop>               
                 <source src="images/[4K] Breaking Bad「Edit」- (Money Trees).mp4" type="video/mp4">
+                <p>Infelizmente seu navegador não conseguiu reproduzir o vídeo</p>
+                <!--
+                    O lado ruim de colocar muitos formatos de vídeo, é que vai consumir muito espaço na memória do servidor.
+
+                    Suponha o seguinte
+
+                    11.5MB (tamanho do vídeo no site)
+                    1000 (acessos de usuários no seu site)
+                    
+                    vídeo * acessos dos usuáriso = tamanho de download para cada usuário que visualiza seu vídeo
+                    
+                    no nosso exemplo isso daria uns 11.500MB de download
+                    
+                    11.500MB * 1024 = 11.2GB de consumo de banda (caso seja executado o vídeo em formato leve mp4 na melhor das hipoteses)
+                -->
+
             </video>
             <p>Um dado curioso é que se usar o servidor do <strong>LiveStream</strong> para acessar uma arquivo fora da pasta em que ele está sendo rodado, ele não vai achar, mesmo que coloque o caminho completo do arquivo, pois precisa configurar a permissão para que ele possa acessar outras pastas do sistema.</p>
             
+
+            <h4>Link para downloads</h4>
+            <p>É possível ainda usar o <code>href</code> para baixar arquivos como por exemplo um pdf</p>
+            <a href="/docs/bitcoin.pdf" download="paper_bitcoin.pdf" type="application/pdf">Baixar livro</a>
+            <!-- definimos o caminho onde o arquivo esta, o nome do arquivo com que será baixado e o tipo do arquivo
+pode ser do tipo zip, png etc. Mais informações no Notion life/schoolar/html+css/Sobre download de arquivos -->
+            <br>
+            <h4>Imagens dinâmicas:</h4>
+            
+            <a href="imagens_dinamicas.html" target="_blank" rel="noopener noreferrer">Imagens dinâmicas</a>
             <hr>
     
             <h2>Formatação de textos</h2>
@@ -170,7 +207,7 @@
                 </a>
                 <p>Também pode ser combinado com o javascript</p>
                 <button onclick="doSomething()" style="font-size: 25px; background-color: grey; color: lightblue; border-radius: 25px;">Click me</button>
-                <label for="texttest" id="texttest">Texto para javascript</label>
+                <p id="texttest">Texto para javascript</p>
                 <script>
                     function doSomething(){
                         window.document.getElementById("texttest").innerHTML = "Texto alterado com o botão do javascript"
@@ -184,30 +221,30 @@
             <h2>Formulário</h2>
             <form action="index.php" method="post" enctype="multipart/form-data">
                 <label for="username">Username:</label>
-                <input type="text" id="username" placeholder="User's name" minlength="6" maxlength="15" required>
+                <input type="text" id="username" placeholder="User's name" minlength="6" maxlength="15" required autocomplete="off">
                 <br>
                 <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="Password">
+                <input type="password" id="password" placeholder="Password" autocomplete="off">
                 <br>
                 <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="example@gmail.com">
+                <input type="email" id="email" placeholder="example@gmail.com" autocomplete="off">
                 <br>
                 <label for="phone">Phone:</label>
-                <input type="tel" id="phone" placeholder="(00)00000-0000" pattern="\([0-9]{2}\)[0-9]{5}-[0-9]{4}">
+                <input type="tel" id="phone" placeholder="(00)00000-0000" pattern="\([0-9]{2}\)[0-9]{5}-[0-9]{4}" autocomplete="off">
                 <br>
                 <label for="bday">Birthdate:</label>
-                <input type="date" id="bday">
+                <input type="date" id="bday" autocomplete="off">
                 <br>
                 <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" min="0" max="99">
+                <input type="number" id="quantity" min="0" max="99" autocomplete="off">
                 <br>
-                <label for="title">Title:</label>
+                Title:
                 <label for="Mr.">Mr.</label>
-                <input type="radio" id="Mr." value="Mr." name="title">
+                <input type="radio" id="Mr." value="Mr." name="title" autocomplete="off">
                 <label for="Ms.">Ms.</label>
-                <input type="radio" id="Ms." value="Ms." name="title">
+                <input type="radio" id="Ms." value="Ms." name="title" autocomplete="off">
                 <label for="PhD.">PhD.</label>
-                <input type="radio" id="PhD" value="PhD." name="title">
+                <input type="radio" id="PhD." value="PhD." name="title" autocomplete="off">
                 <br>
                 <label for="payment">Payment:</label>
                 <select id="payment">
@@ -217,18 +254,19 @@
                 </select>
                 <br>
                 <label for="subscribe">Subscribe:</label>
-                <input type="checkbox" id="subscribe">
+                <input type="checkbox" id="subscribe" autocomplete="off">
                 <br>
                 <label for="comment">Comment:</label>
                 <textarea id="comment" cols="25" rows="3"></textarea>
                 <br>
                 <label for="file">File:</label>
-                <input type="file" id="file" accept="image/png, image/jpeg">
+                <input type="file" id="file" accept="image/png, image/jpeg" autocomplete="off">
                 <br>
                 <input type="reset">
                 <br>
                 <input type="submit">
             </form>
+
         </main>
         <footer>
             <hr>
