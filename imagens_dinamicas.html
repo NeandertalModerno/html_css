@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Imagens dinâmicas</title>
+</head>
+<body>
+    <header>
+        <h1>Imagens dinâmicas e audio</h1>
+    </header>
+    <main>
+        <!--
+            A tag <picture> contem um ou mais elementos <source>, cada um se referindo a diferentes imagens através do atributo srcset. 
+            
+            Desta forma o navegador pode escolher a imagem que melhor se adapte à visualização atual ou dispositivo.
+
+            Cada elemento <source> tem um atributo media que define quando a imagem é mais adequada
+
+            https://www.w3schools.com/html/html_images_picture.asp
+            
+            Isso somente usando html, mas claro que com css e javascript provavelmente pode melhorar muito
+        -->
+        <picture>
+            
+            <source media="(max-width: 750px)" srcset="/images/image_P.png" type="image/png">
+
+            <source media="(max-width: 1050px)" srcset="/images/image_M.png" type="image/png">
+
+            <img src="/images/image_G.png" alt="Imagem Flexível">
+        </picture>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
